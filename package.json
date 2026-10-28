@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "start": "npm --prefix rice-disease-admin start",
+    "dev": "npm --prefix rice-disease-admin run dev"
+  },
+  "dependencies": {
+    "jimp": "^1.6.1",
+    "multer": "^2.5.0"
+  }
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>Users – Admin</title><link rel="stylesheet" href="/css/style.css"></head>
+<body>
+<div class="layout">
+   <aside class="sidebar" id="sidebar">
+    <!-- ADD THIS BUTTON HERE -->
+    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+    <div class="brand"><h2>Rice Disease Admin</h2><small>JRMSU Katipunan</small></div>
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="users.html">Users</a>
+      <a href="diseases.html">Diseases</a>
+      <a href="detections.html">Detection Records</a>
+      <a href="recommendations.html">Recommendations</a>
+      <a href="evaluations.html">Evaluations</a>
+    </nav>
+  </aside>
+  <div class="main">
+    <div class="topbar"><h1>Users</h1>
+      <div class="user"><span id="currentUser"></span><button onclick="logout()">Logout</button></div>
+    </div>
+    <div class="content">
+      <div class="panel">
+        <div class="panel-head">
+          <h2>User Accounts</h2>
+          <button class="btn btn-primary" onclick="openModal()">+ Add User</button>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Username</th>
+              <th>Role</th>
+              <th>Barangay</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="modalBg">
+  <div class="modal">
+    <h3 id="modalTitle">Add User</h3>
+    <input type="hidden" id="editId">
+    <input type="text" id="full_name" placeholder="Full Name">
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password (leave blank to keep)">
+    <select id="role">
+      <option>Farmer</option><option>Technician</option><option>IT Expert</option><option>Admin</option>
+    </select>
+    <input type="text" id="contact_number" placeholder="Contact Number">
+    <input type="text" id="barangay" placeholder="Barangay">
+    <select id="is_active"><option value="1">Active</option><option value="0">Inactive</option></select>
+    <div class="actions">
+      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveUser()">Save</button>
+    </div>
+  </div>
+</div>
+
+<script src="/js/auth.js"></script>
+<script src="/js/users.js"></script>
+</body>
+</html>

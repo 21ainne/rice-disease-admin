@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>Recommendations – Admin</title><link rel="stylesheet" href="/css/style.css"></head>
+<body>
+<div class="layout">
+   <aside class="sidebar" id="sidebar">
+    <!-- ADD THIS BUTTON HERE -->
+    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+    <div class="brand"><h2>Rice Disease Admin</h2><small>JRMSU Katipunan</small></div>
+    <nav>
+      <a href="dashboard.html">Dashboard</a><a href="users.html">Users</a>
+      <a href="diseases.html">Diseases</a><a href="detections.html">Detection Records</a>
+      <a href="recommendations.html">Recommendations</a><a href="evaluations.html">Evaluations</a>
+    </nav>
+  </aside>
+  <div class="main">
+    <div class="topbar"><h1>Treatment Recommendations</h1>
+      <div class="user"><span id="currentUser"></span><button onclick="logout()">Logout</button></div>
+    </div>
+    <div class="content">
+      <div class="panel">
+        <div class="panel-head"><h2>Recommendation Catalog</h2>
+          <button class="btn btn-primary" onclick="openModal()">+ Add</button></div>
+        <table>
+          <thead><tr><th>ID</th><th>Disease</th><th>Treatment</th><th>Pesticide/Fertilizer</th><th>Source</th><th>Actions</th></tr></thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="modalBg">
+  <div class="modal">
+    <h3 id="modalTitle">Add Recommendation</h3>
+    <input type="hidden" id="editId">
+    <select id="disease_id"></select>
+    <textarea id="treatment_text" placeholder="Treatment text"></textarea>
+    <textarea id="pesticide_fertilizer_guide" placeholder="Pesticide / fertilizer guide (FPA-aligned)"></textarea>
+    <input type="text" id="source_reference" placeholder="Source reference (e.g., PhilRice, FPA)">
+    <div class="actions">
+      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="save()">Save</button>
+    </div>
+  </div>
+</div>
+<script src="/js/auth.js"></script>
+<script src="/js/recommendations.js"></script>
+</body>
+</html>

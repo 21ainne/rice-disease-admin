@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Login – Rice Disease Detection</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="login-wrap">
+  <div class="login-card">
+    <h1>Rice Disease Detection Admin</h1>
+    <p class="sub">Jose Rizal Memorial State University – Katipunan Campus</p>
+    
+    <form id="loginForm">
+      <input type="text" id="full_name" placeholder="Full Name" style="display:none;">
+      <input type="text" id="username" placeholder="Username" required autofocus>
+      <input type="password" id="password" placeholder="Password" required>
+      <input type="text" id="admin_id" placeholder="Secret Admin ID" style="display:none;">
+      
+      <button type="submit" id="submitBtn">Sign In</button>
+      <p class="err" id="errMsg" style="color:red; font-size:12px; margin-top:10px;"></p>
+    </form>
+
+    <p style="font-size:14px; margin-top:20px; color:#1e3a8a; cursor:pointer; font-weight:bold;" id="toggleMode">
+      Don't have an Admin account? Create one here.
+    </p>
+  </div>
+</div>
+
+<script>
+let isRegisterMode = false;
+
+document.getElementById('toggleMode').addEventListener('click', () => {
+  isRegisterMode = !isRegisterMode;
+  const fullName = document.getElementById('full_name');
+  const adminId = document.getElementById('admin_id');
+  fullName.style.display = isRegisterMode ? 'block' : 'none';
+  fullName.required = isRegisterMode;
+  adminId.style.display = isRegisterMode ? 'block' : 'none';
+  adminId.required = isRegisterMode;
+  document.getElementById('submitBtn').textContent = isRegisterMode ? 'Create Admin Account' : 'Sign In';
+  document.getElementById('toggleMode').textContent = isRegisterMode 
+    ? 'Already have an account? Login here.' 
+    : "Don't have an Admin account? Create one here.";
+  document.getElementById('errMsg').textContent = '';
+});
+
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const errMsg = document.getElementById('errMsg');
+  errMsg.textContent = '';
+  
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+
+  if (isRegisterMode) {
+    const full_name = document.getElementById('full_name').value;
+    const admin_id = document.getElementById('admin_id').value;
+
+    try {
+      const res = await fetch('/api/auth/register-admin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ full_name, username, password, admin_id })
+      });
+      const data = await res.json();
+      
+      if (res.ok) {
+        alert('Admin Account Created! You can now log in.');
+        document.getElementById('toggleMode').click(); 
+      } else {
+        errMsg.textContent = data.error || 'Registration failed';
+      }
+    } catch (err) {
+      errMsg.textContent = 'Network error.';
+    }
+  } else {
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password, platform: 'web' }),
+        credentials: 'include'
+      });
+      const data = await res.json();
+      
+      if (res.ok) {
+        window.location.href = '/dashboard.html';
+      } else {
+        errMsg.textContent = data.error || 'Login failed';
+      }
+    } catch (err) {
+      errMsg.textContent = 'Network error.';
+    }
+  }
+});
+</script>
+</body>
+</html>

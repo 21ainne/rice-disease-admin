@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard – Rice Disease Admin</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="layout">
+   <aside class="sidebar" id="sidebar">
+    <!-- ADD THIS BUTTON HERE -->
+    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+    <div class="brand"><h2>Rice Disease Admin</h2><small>JRMSU Katipunan</small></div>
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="users.html">Users</a>
+      <a href="diseases.html">Diseases</a>
+      <a href="detections.html">Detection Records</a>
+      <a href="recommendations.html">Recommendations</a>
+      <a href="evaluations.html">Evaluations</a>
+    </nav>
+  </aside>
+  <div class="main">
+    <div class="topbar">
+      <h1>Dashboard</h1>
+      <div class="user"><span id="currentUser"></span>
+        <button onclick="logout()">Logout</button></div>
+    </div>
+    <div class="content">
+      <div class="stats" id="stats"></div>
+      <div class="panel">
+        <div class="panel-head"><h2>Recent Detections</h2></div>
+        <table>
+          <thead><tr><th>ID</th><th>Farmer</th><th>Disease</th><th>Confidence</th><th>Date</th></tr></thead>
+          <tbody id="recentBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/js/auth.js"></script>
+<script src="/js/dashboard.js"></script>
+</body>
+</html>

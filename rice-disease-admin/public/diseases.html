@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>Diseases – Admin</title><link rel="stylesheet" href="/css/style.css"></head>
+<body>
+<div class="layout">
+   <aside class="sidebar" id="sidebar">
+    <!-- ADD THIS BUTTON HERE -->
+    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+    <div class="brand"><h2>Rice Disease Admin</h2><small>JRMSU Katipunan</small></div>
+    <nav>
+      <a href="dashboard.html">Dashboard</a><a href="users.html">Users</a>
+      <a href="diseases.html">Diseases</a><a href="detections.html">Detection Records</a>
+      <a href="recommendations.html">Recommendations</a><a href="evaluations.html">Evaluations</a>
+    </nav>
+  </aside>
+  <div class="main">
+    <div class="topbar"><h1>Diseases &amp; Pests</h1>
+      <div class="user"><span id="currentUser"></span><button onclick="logout()">Logout</button></div>
+    </div>
+    <div class="content">
+      <div class="panel">
+        <div class="panel-head"><h2>Disease / Pest Catalog</h2>
+          <button class="btn btn-primary" onclick="openModal()">+ Add</button></div>
+        <table>
+          <thead><tr><th>ID</th><th>Name</th><th>Category</th><th>Description</th><th>Actions</th></tr></thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="modalBg">
+  <div class="modal">
+    <h3 id="modalTitle">Add Disease</h3>
+    <input type="hidden" id="editId">
+    <input type="text" id="disease_name" placeholder="Disease Name">
+    <select id="category">
+      <option>Fungal</option><option>Bacterial</option><option>Viral</option>
+      <option>Insect Pest</option><option>Healthy</option>
+    </select>
+    <textarea id="description" placeholder="Description / Symptoms"></textarea>
+    <textarea id="glcm_feature_profile" placeholder="GLCM feature profile (optional)"></textarea>
+    <div class="actions">
+      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveDisease()">Save</button>
+    </div>
+  </div>
+</div>
+<script src="/js/auth.js"></script>
+<script src="/js/diseases.js"></script>
+</body>
+</html>
