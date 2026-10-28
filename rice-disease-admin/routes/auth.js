@@ -85,9 +85,10 @@ router.post('/register', async (req, res) => {
 
     const hash = await bcrypt.hash(password, 10);
 
+        // Insert new user as 'Farmer'
     await pool.query(
-      'INSERT INTO users (full_name, username, password_hash, role, contact_number, barangay) VALUES (?, ?, ?, ?, ?, ?)',
-      [full_name, username, hash, 'Farmer', contact_number || null, barangay || null]
+      'INSERT INTO users (full_name, username, password_hash, role, contact_number, barangay, status) VALUES (?, ?, ?, ?, ?, ?, ?)',
+      [full_name, username, hash, 'Farmer', contact_number || null, barangay || null, 'Active']
     );
 
     res.status(201).json({ message: 'Account created successfully! You can now login.' });
